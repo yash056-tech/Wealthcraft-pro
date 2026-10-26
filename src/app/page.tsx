@@ -25,6 +25,7 @@ import {
   BarChart3,
   Layers,
   ChevronRight,
+  UserCheck,
 } from "lucide-react";
 
 const ICON_MAP: Record<string, React.ReactNode> = {
@@ -41,7 +42,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 export default function HomePage() {
-  const { isPro, openPaywall } = useAuth();
+  const { isPro, openPaywall, openRegister } = useAuth();
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
   const filteredCalculators =
@@ -74,6 +75,14 @@ export default function HomePage() {
 
         {/* Primary CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <button
+            onClick={openRegister}
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 shadow-xl shadow-amber-500/25 hover:brightness-110 active:scale-[0.99] transition"
+          >
+            <UserCheck className="h-4 w-4" />
+            <span>Register (Client / Student / Investor)</span>
+          </button>
+
           <a
             href="#calculators-section"
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 text-slate-950 shadow-xl shadow-emerald-500/25 hover:brightness-110 active:scale-[0.99] transition"
@@ -87,7 +96,7 @@ export default function HomePage() {
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-xl text-sm font-bold bg-slate-900 border border-slate-700 text-slate-200 hover:bg-slate-800 hover:border-amber-500/50 hover:text-white transition"
           >
             <Sparkles className="h-4 w-4 text-amber-400" />
-            <span>Pro Tier Benefits (₹999/mo)</span>
+            <span>Pro Tier (₹999/mo)</span>
           </Link>
         </div>
 

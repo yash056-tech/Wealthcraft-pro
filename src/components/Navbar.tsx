@@ -22,6 +22,7 @@ import {
   Scale,
   Receipt,
   Calculator,
+  UserCheck,
 } from "lucide-react";
 
 // Icon mapping helper
@@ -40,7 +41,7 @@ const ICONS: Record<string, React.ReactNode> = {
 
 export function Navbar() {
   const pathname = usePathname();
-  const { isPro, toggleDemoPro, openPaywall, user } = useAuth();
+  const { isPro, toggleDemoPro, openPaywall, openRegister, user } = useAuth();
   const [isCalculatorsOpen, setIsCalculatorsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -157,6 +158,14 @@ export function Navbar() {
               <CreditCard className="h-4 w-4 text-slate-400" />
               <span>Pricing (₹999/mo)</span>
             </Link>
+
+            <button
+              onClick={openRegister}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium text-emerald-400 hover:text-emerald-300 hover:bg-slate-900/60 transition"
+            >
+              <UserCheck className="h-4 w-4 text-emerald-400" />
+              <span>Register</span>
+            </button>
           </nav>
         </div>
 
@@ -235,6 +244,16 @@ export function Navbar() {
               <CreditCard className="h-4 w-4 text-emerald-400" />
               <span>Pricing (Free vs. Pro)</span>
             </Link>
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                openRegister();
+              }}
+              className="w-full flex items-center gap-2 p-2.5 rounded-xl text-sm font-semibold text-emerald-400 hover:bg-slate-900 text-left"
+            >
+              <UserCheck className="h-4 w-4 text-emerald-400" />
+              <span>Register (Client / Student / Investor)</span>
+            </button>
           </div>
 
           <div className="pt-2 border-t border-slate-800">

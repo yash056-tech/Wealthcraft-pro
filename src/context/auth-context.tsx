@@ -19,8 +19,11 @@ interface AuthContextType {
   isLoading: boolean;
   isPaywallOpen: boolean;
   paywallFeature: string;
+  isRegisterOpen: boolean;
   openPaywall: (featureName?: string) => void;
   closePaywall: () => void;
+  openRegister: () => void;
+  closeRegister: () => void;
   toggleDemoPro: () => void;
   upgradeToPro: () => void;
   loginAsDemoUser: () => void;
@@ -38,6 +41,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isPaywallOpen, setIsPaywallOpen] = useState<boolean>(false);
   const [paywallFeature, setPaywallFeature] = useState<string>("Premium Financial Tools");
+  const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
+
+  const openRegister = () => setIsRegisterOpen(true);
+  const closeRegister = () => setIsRegisterOpen(false);
 
   useEffect(() => {
     try {
@@ -143,8 +150,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isLoading,
         isPaywallOpen,
         paywallFeature,
+        isRegisterOpen,
         openPaywall,
         closePaywall,
+        openRegister,
+        closeRegister,
         toggleDemoPro,
         upgradeToPro,
         loginAsDemoUser,

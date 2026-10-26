@@ -4,6 +4,7 @@ import { AuthProvider } from "@/context/auth-context";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PaywallModal } from "@/components/PaywallModal";
+import { RegisterModal } from "@/components/RegisterModal";
 
 export const metadata: Metadata = {
   title: "WealthCraft Pro | Premium Financial Advisory & Simulation Suite",
@@ -36,6 +37,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <PaywallModal />
+          <RegisterModal />
         </AuthProvider>
       </body>
     </html>
