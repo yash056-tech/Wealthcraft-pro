@@ -75,7 +75,7 @@ export function PaymentModal() {
       : "Student / Academic Pass (₹499)";
 
   const configuredUpiId =
-    process.env.NEXT_PUBLIC_UPI_ID || "ya09shu@okaxis";
+    process.env.NEXT_PUBLIC_UPI_ID || "9935605883@nyes";
 
   // Dynamic UPI URL for QR code & mobile intent
   const upiUrl = `upi://pay?pa=${encodeURIComponent(

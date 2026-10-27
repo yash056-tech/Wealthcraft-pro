@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
       customerName,
       customerEmail,
       customerPhone,
-      upiIdUsed = "ya09shu@okaxis",
+      upiIdUsed = "9935605883@nyes",
     } = body;
 
     if (!utrNumber || utrNumber.trim().length < 6) {

@@ -105,7 +105,7 @@ WealthCraft Pro supports three complementary payment channels engineered to rece
   ```
 
 ### 2. Direct Bank UPI QR Scan & Pay (0% Gateway Fee)
-- **Instant Bank Settlement**: Customers scan the dynamic UPI QR code with any UPI app (GPay, PhonePe, Paytm, BHIM, CRED) or copy the UPI ID (`ya09shu@okaxis` or configurable via `NEXT_PUBLIC_UPI_ID`).
+- **Instant Bank Settlement**: Customers scan the dynamic UPI QR code with any UPI app (GPay, PhonePe, Paytm, BHIM, CRED) or copy the UPI ID (`9935605883@nyes` or configurable via `NEXT_PUBLIC_UPI_ID`).
 - **Immediate Deposit**: Funds land directly and immediately in your bank account with zero gateway fee deductions.
 - **UTR Verification**: The user submits the 12-digit UPI Transaction Reference (UTR) number to activate their subscription and generate an instant payment receipt.
 
