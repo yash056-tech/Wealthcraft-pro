@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { PaywallModal } from "@/components/PaywallModal";
 import { RegisterModal } from "@/components/RegisterModal";
+import { PaymentModal } from "@/components/PaymentModal";
 
 export const metadata: Metadata = {
   title: "WealthCraft Pro | Premium Financial Advisory & Simulation Suite",
@@ -38,6 +39,7 @@ export default function RootLayout({
           <Footer />
           <PaywallModal />
           <RegisterModal />
+          <PaymentModal />
         </AuthProvider>
       </body>
     </html>

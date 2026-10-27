@@ -5,7 +5,7 @@ import { useAuth } from "@/context/auth-context";
 import { Check, X, Sparkles, Shield, ArrowRight, Zap, HelpCircle } from "lucide-react";
 
 export default function PricingPage() {
-  const { isPro, openPaywall, toggleDemoPro } = useAuth();
+  const { isPro, openPaywall, toggleDemoPro, openPaymentModal } = useAuth();
   const [billingCycle, setBillingCycle] = useState<"monthly" | "annual">("monthly");
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -185,16 +185,22 @@ export default function PricingPage() {
 
           <div className="mt-8 space-y-2">
             <button
-              onClick={handleCheckout}
-              disabled={isProcessing}
-              className="w-full py-3.5 px-4 rounded-xl text-center text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-amber-600 to-emerald-600 hover:brightness-110 shadow-lg shadow-amber-500/20 transition active:scale-[0.99] disabled:opacity-50"
+              onClick={() => openPaymentModal(billingCycle === "annual" ? "annual" : "monthly")}
+              className="w-full py-3.5 px-4 rounded-xl text-center text-xs font-bold text-slate-950 bg-gradient-to-r from-amber-500 via-amber-600 to-emerald-600 hover:brightness-110 shadow-lg shadow-amber-500/20 transition active:scale-[0.99]"
             >
               {isPro
-                ? "You are Currently on Pro Tier"
-                : isProcessing
-                ? "Connecting to Stripe..."
-                : "Subscribe with Stripe Checkout (₹999/mo)"}
+                ? "Active Pro Tier Member (Upgrade / Switch Plan)"
+                : billingCycle === "annual"
+                ? "Subscribe Annual Plan — ₹9,990 / year (Save ₹2,000)"
+                : "Subscribe Pro Plan — ₹999 / month"}
             </button>
+
+            <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-slate-400">
+              <span>Accepted:</span>
+              <span className="font-semibold text-slate-200">UPI (GPay, PhonePe, Paytm, CRED)</span>
+              <span>•</span>
+              <span className="font-semibold text-slate-200">Cards & NetBanking</span>
+            </div>
 
             <button
               onClick={toggleDemoPro}
@@ -205,6 +211,28 @@ export default function PricingPage() {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Student Concession Banner */}
+      <div className="max-w-4xl mx-auto mb-16 p-6 rounded-2xl border border-indigo-500/30 bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-900 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">
+              STUDENT & ACADEMIC PASS
+            </span>
+            <span className="text-xs text-slate-400">CA / MBA / CFA / Finance Undergrads</span>
+          </div>
+          <h4 className="text-lg font-bold text-white">Full Pro Suite for ₹499 / Semester (6 Months)</h4>
+          <p className="text-xs text-slate-300 mt-0.5">
+            Discounted tier for students with complete access to DCF valuation, scenario saving, and PDF advisory exports.
+          </p>
+        </div>
+        <button
+          onClick={() => openPaymentModal("student")}
+          className="shrink-0 px-5 py-2.5 rounded-xl font-bold text-xs bg-indigo-500 hover:bg-indigo-400 text-slate-950 transition shadow-lg shadow-indigo-500/20"
+        >
+          Get Student Pass (₹499)
+        </button>
       </div>
 
       {/* Feature Comparison Matrix Table */}

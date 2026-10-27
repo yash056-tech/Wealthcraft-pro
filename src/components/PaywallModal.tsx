@@ -5,31 +5,14 @@ import { useAuth } from "@/context/auth-context";
 import { Check, Sparkles, X, Shield, Lock, ArrowRight, Zap } from "lucide-react";
 
 export function PaywallModal() {
-  const { isPaywallOpen, closePaywall, paywallFeature, upgradeToPro, isPro } = useAuth();
+  const { isPaywallOpen, closePaywall, paywallFeature, upgradeToPro, isPro, openPaymentModal } = useAuth();
   const [isRedirecting, setIsRedirecting] = useState(false);
 
   if (!isPaywallOpen || isPro) return null;
 
-  const handleStripeCheckout = async () => {
-    setIsRedirecting(true);
-    try {
-      const res = await fetch("/api/stripe/checkout", { method: "POST" });
-      const data = await res.json();
-      if (data.url) {
-        if (data.simulated) {
-          // If in local/simulated mode without live Stripe credentials, upgrade instantly
-          upgradeToPro();
-        } else {
-          window.location.href = data.url;
-        }
-      } else {
-        upgradeToPro();
-      }
-    } catch {
-      upgradeToPro();
-    } finally {
-      setIsRedirecting(false);
-    }
+  const handleOpenPayment = () => {
+    closePaywall();
+    openPaymentModal("monthly");
   };
 
   return (
@@ -111,18 +94,11 @@ export function PaywallModal() {
 
         <div className="space-y-2.5">
           <button
-            onClick={handleStripeCheckout}
-            disabled={isRedirecting}
-            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold bg-gradient-to-r from-amber-500 via-amber-600 to-emerald-600 text-slate-950 hover:brightness-110 shadow-lg shadow-amber-500/20 transition active:scale-[0.99] disabled:opacity-50"
+            onClick={handleOpenPayment}
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold bg-gradient-to-r from-amber-500 via-amber-600 to-emerald-600 text-slate-950 hover:brightness-110 shadow-lg shadow-amber-500/20 transition active:scale-[0.99]"
           >
-            {isRedirecting ? (
-              <span>Connecting to Stripe...</span>
-            ) : (
-              <>
-                <span>Upgrade with Stripe Checkout</span>
-                <ArrowRight className="h-4 w-4" />
-              </>
-            )}
+            <span>Choose Payment Method (UPI / Card / NetBanking)</span>
+            <ArrowRight className="h-4 w-4" />
           </button>
 
           <button

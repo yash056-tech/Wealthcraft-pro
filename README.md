@@ -87,3 +87,51 @@ npm install
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 💳 Payment Gateway & Direct Bank Account Settlement
+
+WealthCraft Pro supports three complementary payment channels engineered to receive funds directly into your Indian bank account:
+
+### 1. Razorpay (UPI, NetBanking & Cards)
+- **Direct Bank Settlement**: Payments collected via Razorpay (UPI, Google Pay, PhonePe, Paytm, CRED, NetBanking across 50+ banks, Mastercard/Visa/RuPay) are settled directly into your linked bank account (via IFSC and Account number configured in your [Razorpay Dashboard](https://dashboard.razorpay.com)).
+- **Cryptographic Security**: Every payment is signed with HMAC-SHA256 (`razorpay_order_id`, `razorpay_payment_id`, `razorpay_signature`) and verified server-side.
+- **Environment Variables**:
+  ```env
+  RAZORPAY_KEY_ID=rzp_live_your_key_id
+  RAZORPAY_KEY_SECRET=your_key_secret
+  NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_live_your_key_id
+  ```
+
+### 2. Direct Bank UPI QR Scan & Pay (0% Gateway Fee)
+- **Instant Bank Settlement**: Customers scan the dynamic UPI QR code with any UPI app (GPay, PhonePe, Paytm, BHIM, CRED) or copy the UPI ID (`ya09shu@okaxis` or configurable via `NEXT_PUBLIC_UPI_ID`).
+- **Immediate Deposit**: Funds land directly and immediately in your bank account with zero gateway fee deductions.
+- **UTR Verification**: The user submits the 12-digit UPI Transaction Reference (UTR) number to activate their subscription and generate an instant payment receipt.
+
+### 3. Stripe Checkout & Customer Portal
+- Designed for international clients and recurring SaaS billing.
+- Managed customer portal for self-serve invoice downloads and plan updates.
+
+---
+
+## 📧 Email Alerts to ya09shu@gmail.com
+
+Whenever a client, investor, or student interacts with the platform:
+1. **User Registration Alert**: Name, email, mobile number, role (Investor / Real Estate / Student / Advisor), and timestamp are instantly formatted and dispatched to `ya09shu@gmail.com`.
+2. **Payment Confirmation Alert**: On every successful payment (Razorpay, Direct UPI with UTR, or Stripe), an executive notification is dispatched to `ya09shu@gmail.com` containing the transaction ID, amount paid (₹), plan type, and user details.
+
+To configure SMTP delivery:
+```env
+SMTP_USER=ya09shu@gmail.com
+SMTP_PASS=your_16_char_google_app_password
+ADMIN_NOTIFICATION_EMAIL=ya09shu@gmail.com
+```
+*(If credentials are not yet configured in production, the system securely logs all registrations and payment submissions as a resilient fallback).*
+
+---
+
+## 🌐 Production Deployment
+
+- **Live URL**: [https://wealthcraft-pro.vercel.app](https://wealthcraft-pro.vercel.app)
+- **GitHub Repository**: [https://github.com/yash056-tech/Wealthcraft-pro](https://github.com/yash056-tech/Wealthcraft-pro)

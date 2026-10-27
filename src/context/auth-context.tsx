@@ -20,10 +20,14 @@ interface AuthContextType {
   isPaywallOpen: boolean;
   paywallFeature: string;
   isRegisterOpen: boolean;
+  isPaymentModalOpen: boolean;
+  selectedPaymentPlan: "monthly" | "annual" | "student";
   openPaywall: (featureName?: string) => void;
   closePaywall: () => void;
   openRegister: () => void;
   closeRegister: () => void;
+  openPaymentModal: (plan?: "monthly" | "annual" | "student") => void;
+  closePaymentModal: () => void;
   toggleDemoPro: () => void;
   upgradeToPro: () => void;
   loginAsDemoUser: () => void;
@@ -42,9 +46,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isPaywallOpen, setIsPaywallOpen] = useState<boolean>(false);
   const [paywallFeature, setPaywallFeature] = useState<string>("Premium Financial Tools");
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState<boolean>(false);
+  const [selectedPaymentPlan, setSelectedPaymentPlan] = useState<"monthly" | "annual" | "student">("monthly");
 
   const openRegister = () => setIsRegisterOpen(true);
   const closeRegister = () => setIsRegisterOpen(false);
+
+  const openPaymentModal = (plan?: "monthly" | "annual" | "student") => {
+    if (plan) setSelectedPaymentPlan(plan);
+    setIsPaymentModalOpen(true);
+  };
+  const closePaymentModal = () => setIsPaymentModalOpen(false);
 
   useEffect(() => {
     try {
@@ -151,10 +163,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isPaywallOpen,
         paywallFeature,
         isRegisterOpen,
+        isPaymentModalOpen,
+        selectedPaymentPlan,
         openPaywall,
         closePaywall,
         openRegister,
         closeRegister,
+        openPaymentModal,
+        closePaymentModal,
         toggleDemoPro,
         upgradeToPro,
         loginAsDemoUser,
